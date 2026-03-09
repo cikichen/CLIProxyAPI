@@ -1,0 +1,45 @@
+name: Update Homebrew formula
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+  schedule:
+    - cron: '17 2 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update-homebrew-formula:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run formula updater tests
+        run: python -m unittest tests.test_update_homebrew_formula -v
+
+      - name: Update Formula/cliproxyapi.rb
+        run: python scripts/update_homebrew_formula.py
+
+      - name: Commit and push formula changes
+        run: |
+          if git diff --quiet -- Formula/cliproxyapi.rb; then
+            echo "No formula changes detected"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Formula/cliproxyapi.rb
+          git commit -m "update Homebrew formula"
+          git push
