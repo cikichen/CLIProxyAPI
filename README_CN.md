@@ -60,6 +60,31 @@ GLM CODING PLAN 是专为AI编码打造的订阅套餐，每月最低仅需20元
 
 CLIProxyAPI 用户手册： [https://help.router-for.me/](https://help.router-for.me/cn/)
 
+## Homebrew 安装
+
+可以直接通过本仓库使用 Homebrew 安装。
+
+由于当前仓库名不是 `homebrew-cliproxyapi`，所以这里需要使用指向本仓库 URL 的自定义 tap 命令：
+
+```bash
+brew tap router-for-me/cliproxyapi https://github.com/router-for-me/CLIProxyAPI
+brew install cliproxyapi
+```
+
+安装完成后，可以先运行：
+
+```bash
+cliproxyapi --help
+```
+
+### 自动同步 Formula
+
+当前仓库可以把 `Formula/cliproxyapi.rb` 自动同步到最新 release 元数据。
+
+- 本地执行：`python3 scripts/update_homebrew_formula.py`
+- GitHub Actions 工作流：`.github/workflows/update-homebrew-formula.yml`
+- 同步内容包括 formula 的 `version` 和最新 `checksums.txt` 中的各平台 `sha256`
+
 ## 管理 API 文档
 
 请参见 [MANAGEMENT_API_CN.md](https://help.router-for.me/cn/management/api)

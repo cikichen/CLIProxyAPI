@@ -60,6 +60,31 @@ Get 10% OFF GLM CODING PLAN：https://z.ai/subscribe?ic=8JVLJQFSKB
 
 CLIProxyAPI Guides: [https://help.router-for.me/](https://help.router-for.me/)
 
+## Homebrew
+
+Install from this repository with Homebrew.
+
+Because this repository is not named `homebrew-cliproxyapi`, use a custom tap command that points to this repository URL:
+
+```bash
+brew tap router-for-me/cliproxyapi https://github.com/router-for-me/CLIProxyAPI
+brew install cliproxyapi
+```
+
+After installation, you can start with:
+
+```bash
+cliproxyapi --help
+```
+
+### Auto-syncing the formula
+
+This repository can keep `Formula/cliproxyapi.rb` in sync with the latest upstream release metadata.
+
+- Run locally: `python3 scripts/update_homebrew_formula.py`
+- GitHub Actions workflow: `.github/workflows/update-homebrew-formula.yml`
+- The updater syncs the Homebrew formula `version` and all release `sha256` values from the latest `checksums.txt`
+
 ## Management API
 
 see [MANAGEMENT_API.md](https://help.router-for.me/management/api)
