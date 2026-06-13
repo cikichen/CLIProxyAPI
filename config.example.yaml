@@ -49,14 +49,15 @@ pprof:
   enable: false
   addr: "127.0.0.1:8316"
 
-# Go dynamic plugins are trusted in-process code. They are disabled by default.
-# Build plugins with go build -buildmode=plugin for the target GOOS/GOARCH.
+# Standard dynamic library plugins are trusted in-process code. They are disabled by default.
+# Build Go examples with go build -buildmode=c-shared for the target GOOS/GOARCH.
+# Other languages can implement the same C ABI and JSON method protocol.
 # Plugin executors require a matching auth record with the same provider key.
 # If the same provider is configured as OpenAI-compatible, the native executor wins.
 # Plugin command-line flags and Management API routes are optional capabilities.
 # Existing native flags/routes and higher-priority plugin flags/routes cannot be replaced.
-# 插件列表 Management API 会读取插件 Metadata 中的 Logo 和 ConfigFields，用于管理端展示。
-# 单插件 enabled 只控制 plugins.configs.<pluginID>.enabled，不会隐式修改全局 plugins.enabled。
+# Plugin list Management API reads Logo and ConfigFields from plugin metadata for management UI display.
+# Per-plugin enabled only controls plugins.configs.<pluginID>.enabled and does not implicitly change global plugins.enabled.
 plugins:
   enabled: false
   dir: "plugins"
@@ -391,9 +392,9 @@ nonstream-keepalive-interval: 0
 #   xai:
 #     - name: "grok-4.3"
 #       alias: "grok-latest"
-#   qoder:                            # plugin provider keys are supported for OAuth plugins
-#     - name: "qmodel_latest"
-#       alias: "qlatest"
+#   sample-provider:                  # plugin provider keys are supported for OAuth plugins
+#     - name: "sample-model-latest"
+#       alias: "sample-latest"
 
 # OAuth provider excluded models
 # oauth-excluded-models:
